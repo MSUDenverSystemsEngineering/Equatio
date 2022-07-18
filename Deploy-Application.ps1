@@ -171,6 +171,13 @@ Try {
 		[string]$installPhase = 'Post-Installation'
 
 		## <Perform Post-Installation tasks here>
+		## Delete the desktop shortcut
+		If (Test-Path "$env:Public\Desktop\Equatio.lnk") {
+			Remove-Item "$env:Public\Desktop\Equatio.lnk" -Force
+		}
+		Else {
+			Write-Log -Message "Shortcut not detected." -Source 'Pre-Installation' -LogType 'CMTrace'
+		}
 
 		## Display a message at the end of the install
 		If (-not $useDefaultMsi) { Show-InstallationPrompt -Message "$appName $appVersion has been successfully installed." -ButtonRightText 'OK' -Icon Information -NoWait }
@@ -269,8 +276,8 @@ Catch {
 # SIG # Begin signature block
 # MIIU9wYJKoZIhvcNAQcCoIIU6DCCFOQCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUriqfcN+T6RF93uWpTWo0YNdx
-# 90+gghHXMIIFbzCCBFegAwIBAgIQSPyTtGBVlI02p8mKidaUFjANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzfuE5g5zQ6hkzn098DDu0FDG
+# uqGgghHXMIIFbzCCBFegAwIBAgIQSPyTtGBVlI02p8mKidaUFjANBgkqhkiG9w0B
 # AQwFADB7MQswCQYDVQQGEwJHQjEbMBkGA1UECAwSR3JlYXRlciBNYW5jaGVzdGVy
 # MRAwDgYDVQQHDAdTYWxmb3JkMRowGAYDVQQKDBFDb21vZG8gQ0EgTGltaXRlZDEh
 # MB8GA1UEAwwYQUFBIENlcnRpZmljYXRlIFNlcnZpY2VzMB4XDTIxMDUyNTAwMDAw
@@ -370,13 +377,13 @@ Catch {
 # ZSBTaWduaW5nIENBIFIzNgIRAKVN33D73PFMVIK48rFyyjEwCQYFKw4DAhoFAKB4
 # MBgGCisGAQQBgjcCAQwxCjAIoAKAAKECgAAwGQYJKoZIhvcNAQkDMQwGCisGAQQB
 # gjcCAQQwHAYKKwYBBAGCNwIBCzEOMAwGCisGAQQBgjcCARUwIwYJKoZIhvcNAQkE
-# MRYEFLt8RWcDevui0krsjfYlL38ruFxzMA0GCSqGSIb3DQEBAQUABIIBgARpDIQq
-# LOWFg8BugeDoR48u2xzOU2xZjcr+FwnZoMIigwbOLwHDsY5iZlvMYgoGUkgcpaUn
-# 0gyCH2Qr8CBWAWo4GC9189wj9Pb4kmY4WJjj1bCQ1LkX36fCuspaOy6Vz7ltMnQS
-# YL9WD6f0mJbw8xFtXXWeoghOZSEkpflpmHgBSd5SRW26wdzOAeBazFfZp5KxvdFI
-# d/5RcTaP0LAMfQWrRn+GkqOlIQ6CR1Pj5DzKr0ai0rrwA6IFvEKNfsLfB64wIJIy
-# AIo50yrTNQfjuoTow4jrddQCsU6yFvD045kxT6jZNn5Ae7amS3OIehda4xWMARpa
-# pG6cu4QspOH4bnD78IMQbqisBRlLBwkCm5QhWoxdOnrLRN1vQbNDBTsoJc7TbWts
-# /pRVv5vREHgkUgE92EeVUBd/xT8uLDKYiAGzOiTjlGoMI8PLoabuDbpFCMuG0yNB
-# JARM4A06CRp/9ZmRV07FwyEO8K3XaUaLzlFzmobni85FehOpDW1Ywiduog==
+# MRYEFMtSwo4A87iy6e54P0fEJ2FpPooSMA0GCSqGSIb3DQEBAQUABIIBgF37n8tj
+# oMVDs2OXtzeGqoWxpoqIkXyrMsu6OzkH5OrWwgvxvConJHEFkVXlV8XUBhX2OBIJ
+# AEGv7OpIWmxc1WwyU7/WVQL8y8FTa+B2FF2bWNp1Br+AjXO/GuvwfUSgXV9a/+k7
+# 1uJiUhBbSsHzHCwZ+/r0ZsMjfRE46b6xpT6xNGbHCo0dAoVUf5CR2IfykQJkQKzX
+# fqJDNeK4jsvgaNHApQaboe/owbWKSYKV5Zg1sKjrfGK5lJlWDHb8/zbVkRJ5yrYO
+# GsbaZMqhpI/0rbLRlhp7e0se4L+s9R0NeZpS7ukYwhBC7WjPH13eXUpnPdfODAFS
+# H8cVfzKSu2bpALW6kmDI4efHO8aynH3f+ykg3YdiXNmzVpFAIODDdKaBg3keclYJ
+# lm/BMHCwAV/VDJCEXeWJxbazSpszV1qEDOmxUkVt56mwUW2u/rYb6bZt9he9JjHi
+# yD7gE5QUv485G6DwEswMuIuzS30lVicriqVC8WS4BgUWgzDz6cq31HVMFw==
 # SIG # End signature block
